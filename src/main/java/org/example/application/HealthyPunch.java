@@ -30,15 +30,9 @@ public class HealthyPunch {
         driver.get(fullURL);
         driver.manage().window().maximize();
         WebElement punchButton = driver.findElement(By.xpath(PUNCH_BUTTON_XPATH));
-        log.info(punchButton.getText());
-        if (!punchButton.getText().equals(PUNCH_FINISH_KEYWORDS)){
-            punchButton.click();
-            driver.navigate().refresh();
-            if (punchButton.getText().equals(PUNCH_FINISH_KEYWORDS))
-                log.info("{} {}已自动打卡",user.getUsername(),user.getName());
-        }else{
-            log.info("{} {} {}",user.getUsername(),user.getName(),PUNCH_FINISH_KEYWORDS);
-        }
+        punchButton.click();
+        if (punchButton.getText().equals(PUNCH_FINISH_KEYWORDS))
+            log.info("{} {}已自动打卡",user.getUsername(),user.getName());
     }
 
 }

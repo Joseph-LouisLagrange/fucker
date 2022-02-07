@@ -19,7 +19,11 @@ import org.example.util.CommonAction;
 import org.example.util.StaticFactory;
 import org.openqa.selenium.WebDriver;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -60,7 +64,7 @@ public class AutomaticFunction {
                     .drinkCoffee(2, TimeUnit.SECONDS)                                                // 再次喝咖啡
                     .next(() -> new HealthyPunch(newDriver).punch(user, stealTicket.get()))                        // 进行 Click 打卡
                     .build();
-            assemblyLiner.run();
+            assemblyLiner.run();    // 运行流水线
         } finally {
             newDriver.quit();
             webDriver.quit();
@@ -89,10 +93,10 @@ public class AutomaticFunction {
                         .drinkCoffee(2, TimeUnit.SECONDS)                                                // 再次喝咖啡
                         .next(() -> new HealthyPunch(newDriver).punch(user, stealTicket.get()))                        // 进行 Click 打卡
                         .build();
-                    assemblyLiner.run();
+                    assemblyLiner.run();    // 运行流水线
             }
         } finally {
-            newDriver.quit();
+            //newDriver.quit();
             mainWebDriver.quit();
             proxyServer.abort();
         }
@@ -108,4 +112,5 @@ public class AutomaticFunction {
         }.getType());
         serializedGoreAtHealthManagement(users);
     }
+
 }
