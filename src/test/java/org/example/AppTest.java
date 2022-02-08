@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 
 import net.lightbody.bmp.util.ClasspathResourceUtil;
+import org.apache.commons.lang.time.DateUtils;
 import org.example.core.AssemblyLiner;
 import org.example.core.AssemblyLinerBuilder;
 import org.example.core.DefaultAssemblyLinerBuilder;
@@ -19,10 +20,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -35,12 +38,12 @@ public class AppTest
      */
     @Test
     public void shouldAnswerWithTrue() throws Exception {
-        TimerScheduler scheduler = new TimerScheduler();
-        scheduler.start();
-        scheduler.schedule(() -> {
-            System.out.println(LocalDateTime.now());
-        }, 2, TimeUnit.SECONDS);
-
+        Date now = new Date();
+//        now.setHours(0);
+//        now.setMinutes(0);
+//        now.setSeconds(0);
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println("当前时间为: " + ft.format(now));
     }
 }
 

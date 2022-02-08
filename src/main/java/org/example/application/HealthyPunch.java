@@ -2,6 +2,7 @@ package org.example.application;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.User;
+import org.example.util.EventUtil;
 import org.example.util.StaticFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -27,10 +28,10 @@ public class HealthyPunch {
 
     public void punch(User user, String stealTicket){
         String fullURL = String.format("%s?ticket=%s", HEALTHY_INDEX_URL, stealTicket);
-        driver.get(fullURL);
+        driver.navigate().to(fullURL);
         driver.manage().window().maximize();
         WebElement punchButton = driver.findElement(By.xpath(PUNCH_BUTTON_XPATH));
-        punchButton.click();
+        EventUtil.click(driver,punchButton);
         if (punchButton.getText().equals(PUNCH_FINISH_KEYWORDS))
             log.info("{} {}已自动打卡",user.getUsername(),user.getName());
     }

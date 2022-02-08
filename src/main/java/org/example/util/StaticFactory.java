@@ -24,7 +24,7 @@ public class StaticFactory {
     public static WebDriver getProxyWebDriver(Proxy proxy){
         FirefoxOptions options = new FirefoxOptions();
         options.setAcceptInsecureCerts(true);
-        //options.setHeadless(true);
+        options.setHeadless(true);
         options.setProxy(proxy);
         FirefoxDriver driver = new FirefoxDriver(options);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -35,7 +35,7 @@ public class StaticFactory {
 
     public static WebDriver getWebDriver(){
         FirefoxOptions options = new FirefoxOptions();
-        //options.setHeadless(true);
+        options.setHeadless(true);
         options.setAcceptInsecureCerts(true);
         FirefoxDriver driver = new FirefoxDriver(options);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

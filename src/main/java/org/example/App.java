@@ -9,6 +9,7 @@ import net.lightbody.bmp.BrowserMobProxyServer;
 import net.lightbody.bmp.client.ClientUtil;
 import net.lightbody.bmp.proxy.CaptureType;
 import net.lightbody.bmp.util.ClasspathResourceUtil;
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.lang3.ClassPathUtils;
 import org.apache.logging.log4j.util.PropertiesUtil;
 import org.example.listen.Spreader;
@@ -43,6 +44,11 @@ import java.util.concurrent.TimeUnit;
 public class App 
 {
     public static void main( String[] args ) throws Exception {
+        // AutomaticFunction.defaultGoreAtHealthManagement();
+        Date now = new Date();
+        now.setHours(0);
+        now.setMinutes(0);
+        now.setSeconds(0);
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
@@ -52,6 +58,6 @@ public class App
                     log.error(e.toString());
                 }
             }
-        }, new Date(),TimeUnit.HOURS.toMillis(6));
+        }, DateUtils.addDays(now,1),TimeUnit.HOURS.toMillis(6));
     }
 }

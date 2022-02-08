@@ -2,6 +2,7 @@ package org.example.logic;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
 import net.lightbody.bmp.BrowserMobProxyServer;
 import net.lightbody.bmp.client.ClientUtil;
 import org.example.application.HealthyPunch;
@@ -30,6 +31,7 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * 系统中所有已内置搭建完成的自动化功能
  */
+@Slf4j
 public class AutomaticFunction {
     // 顶一下
     public static void goreAtHealthManagement(String username, String password) {
@@ -64,7 +66,11 @@ public class AutomaticFunction {
                     .drinkCoffee(2, TimeUnit.SECONDS)                                                // 再次喝咖啡
                     .next(() -> new HealthyPunch(newDriver).punch(user, stealTicket.get()))                        // 进行 Click 打卡
                     .build();
-            assemblyLiner.run();    // 运行流水线
+            try {
+                assemblyLiner.run();    // 运行流水线
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } finally {
             newDriver.quit();
             webDriver.quit();
@@ -93,10 +99,14 @@ public class AutomaticFunction {
                         .drinkCoffee(2, TimeUnit.SECONDS)                                                // 再次喝咖啡
                         .next(() -> new HealthyPunch(newDriver).punch(user, stealTicket.get()))                        // 进行 Click 打卡
                         .build();
+                try {
                     assemblyLiner.run();    // 运行流水线
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         } finally {
-            //newDriver.quit();
+            newDriver.quit();
             mainWebDriver.quit();
             proxyServer.abort();
         }
