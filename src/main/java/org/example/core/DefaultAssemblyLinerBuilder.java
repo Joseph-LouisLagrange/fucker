@@ -1,5 +1,8 @@
 package org.example.core;
 
+import org.example.core.step.Step;
+import org.example.core.step.WaitStep;
+
 import java.util.concurrent.TimeUnit;
 
 public class DefaultAssemblyLinerBuilder implements AssemblyLinerBuilder {

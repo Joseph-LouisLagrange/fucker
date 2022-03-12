@@ -1,11 +1,11 @@
-package org.example.packet;
+package org.example.packet.request;
 
 import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 
-public class BMPRequestPacket extends RequestPacket {
-    public BMPRequestPacket(HttpRequest request, HttpMessageContents contents, HttpMessageInfo messageInfo){
+import java.nio.charset.Charset;
 
-    }
+public class BMPRequestPacket extends RequestPacket {
+
 }

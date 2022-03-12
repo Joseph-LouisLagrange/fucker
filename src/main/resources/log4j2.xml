@@ -2,14 +2,14 @@
 <Configuration status="WARN">
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+            <PatternLayout charset="UTF-8" pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
         </Console>
         <File name="AutomaticLog" fileName="fuck.log">
-            <PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+            <PatternLayout charset="UTF-8" pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
         </File>
     </Appenders>
     <Loggers>
-        <Root level="error">
+        <Root level="info">
             <AppenderRef ref="Console" />
         </Root>
         <Logger name="org.example.application.HealthyPunch" level="info" additivity = "false">

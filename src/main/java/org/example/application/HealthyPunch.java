@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
  * 健康管理助手 每日一顶
  */
 @Slf4j
+@Deprecated
 public class HealthyPunch {
 
     public static final String PUNCH_FINISH_KEYWORDS = "今日已顶";

@@ -1,6 +1,8 @@
 package org.example.core;
 
 
+import org.example.core.step.Step;
+
 import java.util.concurrent.TimeUnit;
 
 public interface AssemblyLinerBuilder {

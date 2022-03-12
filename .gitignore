@@ -131,3 +131,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+!/src/test/java/org/example/AppTest.java

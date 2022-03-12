@@ -2,38 +2,12 @@ package org.example;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import com.sun.org.apache.bcel.internal.util.ClassPath;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.extern.slf4j.Slf4j;
-import net.lightbody.bmp.BrowserMobProxyServer;
-import net.lightbody.bmp.client.ClientUtil;
-import net.lightbody.bmp.proxy.CaptureType;
-import net.lightbody.bmp.util.ClasspathResourceUtil;
-import org.apache.commons.lang.time.DateUtils;
-import org.apache.commons.lang3.ClassPathUtils;
-import org.apache.logging.log4j.util.PropertiesUtil;
-import org.example.listen.Spreader;
-import org.example.logic.AutomaticFunction;
-import org.example.packet.RequestPacket;
-import org.example.packet.ResponsePacket;
-import org.example.steal.ApplicationTicketStealer;
-import org.example.steal.PersonLessonTicketProxyStealer;
-import org.example.util.ClasspathUtils;
-import org.example.util.CommonAction;
-import org.example.util.StaticFactory;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.seleniumhq.jetty9.util.thread.TimerScheduler;
+import org.example.application.HealthyPunchApp;
+import org.example.util.PathUtils;
 
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.charset.Charset;
-import java.sql.Time;
-import java.time.LocalDateTime;
-import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.io.IOException;
+import java.util.List;
 
 
 /**
@@ -44,20 +18,13 @@ import java.util.concurrent.TimeUnit;
 public class App 
 {
     public static void main( String[] args ) throws Exception {
-        // AutomaticFunction.defaultGoreAtHealthManagement();
-        Date now = new Date();
-        now.setHours(0);
-        now.setMinutes(0);
-        now.setSeconds(0);
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    AutomaticFunction.defaultGoreAtHealthManagement();
-                }catch (Exception e){
-                    log.error(e.toString());
-                }
-            }
-        }, DateUtils.addDays(now,1),TimeUnit.HOURS.toMillis(6));
+        List<User> users = getUsers();
+        // 健康打卡
+        HealthyPunchApp healthyPunchApp = new HealthyPunchApp();
+        healthyPunchApp.punch(users);
+    }
+
+    public static List<User> getUsers() throws IOException {
+       return new Gson().fromJson(PathUtils.getReaderFromProjectPath("users.json"),new TypeToken<List<User>>(){}.getType());
     }
 }

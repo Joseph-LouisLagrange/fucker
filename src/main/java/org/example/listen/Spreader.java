@@ -1,5 +1,6 @@
 package org.example.listen;
 
+import com.google.common.collect.Lists;
 import org.example.listen.Listener;
 import org.example.packet.Packet;
 
@@ -9,9 +10,15 @@ import java.util.List;
 import java.util.concurrent.*;
 
 public class Spreader<T extends Packet> {
-    private BlockingQueue<T> bus = new LinkedBlockingDeque<>();
 
-    private List<Listener<T>> listeners = Collections.synchronizedList(new ArrayList<>());
+    private List<Listener<T>> listeners;
+
+    private Context context;
+
+    @SafeVarargs
+    public Spreader(Listener<T>...listeners){
+        this.listeners = Collections.synchronizedList(Lists.newArrayList(listeners));
+    }
 
     public void addListener(Listener<T> listener){
         listeners.add(listener);
